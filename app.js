@@ -89,10 +89,20 @@ app.use((req, res, next) => {
   next();
 });
 
+
+
 app.use('/listings',listingsRouter);
 app.use('/listings/:id/reviews',reviewsRouter);
 app.use('/user', userRouter);
 
+app.get('/',async (req, res,next) => {
+  try {
+    const listings = await Listing.find({});
+    res.render('./listings/index.ejs', { listings: listings });
+  } catch (error) {
+    next(error);
+  }
+});
 
 // app.get('/favicon.ico', (req, res) => res.status(204).end());
 
