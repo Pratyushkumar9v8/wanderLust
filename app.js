@@ -21,6 +21,7 @@ const User = require('./models/user');
 const multer = require('multer');
 const {storage}=require("./cloudConfig.js");
 const upload = multer({storage});
+const Listing = require('../models/listing');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -90,12 +91,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/',async (req, res,next) => {
-  try {
-    const listings = await Listing.find({});
-    res.render('./listings/index.ejs', { listings: listings });
-  } catch (error) {
-    next(error);
-  }
+    next("Hello Enjoy wanderLust");
 });
 
 app.use('/listings',listingsRouter);
