@@ -89,12 +89,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
-app.use('/listings',listingsRouter);
-app.use('/listings/:id/reviews',reviewsRouter);
-app.use('/user', userRouter);
-
 app.get('/',async (req, res,next) => {
   try {
     const listings = await Listing.find({});
@@ -103,6 +97,12 @@ app.get('/',async (req, res,next) => {
     next(error);
   }
 });
+
+app.use('/listings',listingsRouter);
+app.use('/listings/:id/reviews',reviewsRouter);
+app.use('/user', userRouter);
+
+
 
 // app.get('/favicon.ico', (req, res) => res.status(204).end());
 
