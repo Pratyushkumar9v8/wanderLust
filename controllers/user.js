@@ -9,7 +9,8 @@ module.exports.getSignup=async (req, res) => {
 
 module.exports.postSignup= async (req, res,next) => {
     try{
-        let {username, password, email} = req.body;
+        let {username, password, email,confirmPassword} = req.body;
+        if(password!==confirmPassword) throw new ExpressError('Passwords do not match', 400);
         const newUser = new User({username,  email});
         const registeredUser =  await User.register(newUser, password);
         console.log(registeredUser);
