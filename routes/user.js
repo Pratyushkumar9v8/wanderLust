@@ -17,6 +17,23 @@ router
      .get(listingController.getLogin)
      .post(saveRedirectUrl, passport.authenticate('local', {failureRedirect: '/user/login',failureFlash: true,}),listingController.postLogin);
 
+router.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+router.get(
+  '/auth/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: '/user/login',
+    failureFlash: true,
+  }),
+  (req, res) => {
+    req.flash('success', `Welcome, ${req.user.username}`);
+    res.redirect('/listings');
+  }
+); 
+
 router.get('/logout',listingController.logOut );
 
 module.exports = router;
