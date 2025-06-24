@@ -23,7 +23,7 @@ const {storage}=require("./cloudConfig.js");
 const upload = multer({storage});
 
 require('dotenv').config();
-require('./auth/passportConfig')(); // Load strategy
+require('./passportConfig.js')(); // Load strategy
 
 
 app.set('view engine', 'ejs');
