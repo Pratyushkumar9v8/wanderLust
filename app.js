@@ -22,6 +22,10 @@ const multer = require('multer');
 const {storage}=require("./cloudConfig.js");
 const upload = multer({storage});
 
+require('dotenv').config();
+require('./auth/passportConfig')(); // Load strategy
+
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from the public directory
