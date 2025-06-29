@@ -11,7 +11,12 @@ const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
         folder: 'wanderlust_DEV',
-        allowedFormats: ['jpg', 'png', 'jpeg'],
+        allowed_formats: ['jpg', 'png', 'jpeg'],
+        transformation: [
+            { width: 1200, height: 800, crop: 'limit' }, // Resize if image is too large
+            { quality: 'auto' },                         // Compress automatically
+            { fetch_format: 'auto' }                     // Save in optimal format (WebP/JPEG)
+        ],
     },
 });
 

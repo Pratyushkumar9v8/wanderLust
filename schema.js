@@ -9,7 +9,25 @@ module.exports.listingSchema = Joi.object({
     price: Joi.number().required().min(0),
     location: Joi.string().required(),
     country: Joi.string().required(),
-    image: Joi.any() // allow optional file or URL
+    image: Joi.any(), // allow optional file or URL
+    type: Joi.string().valid(
+                  'Room',
+                  'Flat',
+                  'Villa',
+                  'Apartment',
+                  'Studio',
+                  'Penthouse',
+                  'Duplex',
+                  'Bungalow',
+                  'Mansion',
+                  'Cottage',
+                  'Townhouse',
+                  'Condominium',
+                  'Loft',
+                  'Serviced Apartment',
+                  'Farmhouse',
+                  'Row House'
+                ).required()
   }).required()
 });
 

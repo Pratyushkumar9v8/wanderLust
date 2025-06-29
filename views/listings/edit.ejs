@@ -9,9 +9,35 @@
             <label for="description" class="form-label">Description:</label>
             <textarea required class="form-control" name="listing[description]" rows="3"><%= listing.description %></textarea>
 
-            <label for="price" class="form-label">Price:</label>
-            <input required class="form-control" type="number" name="listing[price]" value="<%= listing.price %>">
+            <div class="d-flex gap-3">
+                <div style="flex: 1;">
+                    <label for="price" class="form-label">Price :</label>
+                    <input type="number" name="listing[price]" class="form-control" value="<%= listing.price %>"  required>
+                </div>
+                <div style="flex: 1;">
+                    <label for="type" class="form-label">Type:</label>
+                    <select name="listing[type]" id="type" class="form-select" required>
+                        <option disabled selected>Select type</option>
+                        <option value="Room" <%= listing.type === 'Room' ? 'selected' : '' %>>Room</option>
+                        <option value="Flat" <%= listing.type === 'Flat' ? 'selected' : '' %>>Flat</option>
+                        <option value="Villa" <%= listing.type === 'Villa' ? 'selected' : '' %>>Villa</option>
+                        <option value="Apartment" <%= listing.type === 'Apartment' ? 'selected' : '' %>>Apartment</option>
+                        <option value="Studio" <%= listing.type === 'Studio' ? 'selected' : '' %>>Studio</option>
+                        <option value="Penthouse" <%= listing.type === 'Penthouse' ? 'selected' : '' %>>Penthouse</option>
+                        <option value="Duplex" <%= listing.type === 'Duplex' ? 'selected' : '' %>>Duplex</option>
+                        <option value="Bungalow" <%= listing.type === 'Bungalow' ? 'selected' : '' %>>Bungalow</option>
+                        <option value="Mansion" <%= listing.type === 'Mansion' ? 'selected' : '' %>>Mansion</option>
+                        <option value="Cottage" <%= listing.type === 'Cottage' ? 'selected' : '' %>>Cottage</option>
+                        <option value="Townhouse" <%= listing.type === 'Townhouse' ? 'selected' : '' %>>Townhouse</option>
+                        <option value="Condominium" <%= listing.type === 'Condominium' ? 'selected' : '' %>>Condominium</option>
+                        <option value="Loft" <%= listing.type === 'Loft' ? 'selected' : '' %>>Loft</option>
+                        <option value="Serviced Apartment" <%= listing.type === 'Serviced Apartment' ? 'selected' : '' %>>Serviced Apartment</option>
+                        <option value="Farmhouse" <%= listing.type === 'Farmhouse' ? 'selected' : '' %>>Farmhouse</option>
+                        <option value="Row House" <%= listing.type === 'Row House' ? 'selected' : '' %>>Row House</option>
 
+                    </select>
+                </div>
+            </div>
             <div class="mb-3">
                     Original Listing Image:<br>
                     <img src="<%= originalImageUrl%>" alt="<%= listing.title %>" style="max-width: 200px;">

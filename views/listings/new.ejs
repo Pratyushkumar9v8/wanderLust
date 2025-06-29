@@ -2,20 +2,53 @@
 <body>
     <h2>Create new Listing</h2>
     <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
-        <div style="max-width: 1000px; ">
-            <label for="title"  class="form-label">Title :</label>
+        <div style="max-width: 1000px;">
+            <label for="title" class="form-label">Title :</label>
             <input type="text" name="listing[title]" class="form-control" required>
-            <label for="description"  class="form-label">Description :</label>
+
+            <label for="description" class="form-label">Description :</label>
             <input type="text" name="listing[description]" class="form-control" required>
-            <label for="price"  class="form-label">Price :</label>
-            <input type="number" name="listing[price]" class="form-control" required>
-            <label for="image"  class="form-label">Upload Image : (max size: 5mb)</label>
+
+            <div class="d-flex gap-3">
+                <div style="flex: 1;">
+                    <label for="price" class="form-label">Price :</label>
+                    <input type="number" name="listing[price]" class="form-control" required>
+                </div>
+                <div style="flex: 1;">
+                    <label for="type" class="form-label">Type:</label>
+                    <select name="listing[type]" id="type" class="form-select" required>
+                        <option disabled selected>Select type</option>
+                        <option value="Room">Room</option>
+                        <option value="Flat">Flat</option>
+                        <option value="Villa">Villa</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="Studio">Studio</option>
+                        <option value="Penthouse">Penthouse</option>
+                        <option value="Duplex">Duplex</option>
+                        <option value="Bungalow">Bungalow</option>
+                        <option value="Mansion">Mansion</option>
+                        <option value="Cottage">Cottage</option>
+                        <option value="Townhouse">Townhouse</option>
+                        <option value="Condominium">Condominium</option>
+                        <option value="Loft">Loft</option>
+                        <option value="Serviced Apartment">Serviced Apartment</option>
+                        <option value="Farmhouse">Farmhouse</option>
+                        <option value="Row House">Row House</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <label for="image" class="form-label mt-3">Upload Image : (max size: 5mb)</label>
             <input type="file" name="listing[image]" class="form-control" required>
-            <label for="location"  class="form-label">Location :</label>
+
+            <label for="location" class="form-label">Location :</label>
             <input type="text" name="listing[location]" class="form-control" required>
-            <label for="country"  class="form-label">Country :</label>
+
+            <label for="country" class="form-label">Country :</label>
             <input type="text" name="listing[country]" class="form-control" required><br>
-            <button type="submit" class="btn btn-dark">Create</button>
+
+            <button type="submit" class="btn btn-dark mt-2">Create</button>
         </div>
     </form>
     <br>

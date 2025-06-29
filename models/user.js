@@ -10,6 +10,12 @@ const userSchema=new Schema({
     },
     username: String,
     password: String,
+    wishlist: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Listing'
+        }
+    ],
     googleId: String,
     profilePicture: String
 });

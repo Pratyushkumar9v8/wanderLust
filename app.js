@@ -21,6 +21,7 @@ const User = require('./models/user');
 const multer = require('multer');
 const {storage}=require("./cloudConfig.js");
 const upload = multer({storage});
+const wishlistRoutes = require('./routes/wishlist');
 
 require('dotenv').config();
 require('./passportConfig.js')(); // Load strategy
@@ -100,6 +101,7 @@ app.get('/', (req, res) => {
 app.use('/listings',listingsRouter);
 app.use('/listings/:id/reviews',reviewsRouter);
 app.use('/user', userRouter);
+app.use(wishlistRoutes);
 
 
 

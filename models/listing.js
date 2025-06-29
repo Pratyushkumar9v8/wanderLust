@@ -20,6 +20,22 @@ const listingSchema = new Schema({
   location: String,
   image: imageSchema,
   country: String,
+  type: {
+    type: String,
+    enum: ['Room','Flat','Villa','Apartment','Studio',
+                  'Penthouse',
+                  'Duplex',
+                  'Bungalow',
+                  'Mansion',
+                  'Cottage',
+                  'Townhouse',
+                  'Condominium',
+                  'Loft',
+                  'Serviced Apartment',
+                  'Farmhouse',
+                  'Row House'], // Allowed values
+    required: true
+  },
   reviews :[
     {
       type:Schema.Types.ObjectId,

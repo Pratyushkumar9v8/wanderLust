@@ -1,9 +1,11 @@
 const Listing = require('../models/listing');
 
 module.exports.index=async (req, res,next) => {
+  const { type } = req.query;
   try {
-    const listings = await Listing.find({});
-    res.render('./listings/index.ejs', { listings: listings });
+    const filter = type ? { type } : {};
+    const listings = await Listing.find(filter);
+    res.render('listings/index', { listings, selectedType: type || '' });
   } catch (error) {
     next(error);
     // res.status(500).send('Error fetching listings: ' + error.message);
