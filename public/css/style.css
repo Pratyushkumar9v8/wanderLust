@@ -7,8 +7,12 @@
     color: #fe424d;
     font-size: 2rem;
 }
+.navbar-brand{
+    color: #fe424d;
+}
 .nav-link{
     color: #222222 !important;
+    font-size: 1.1rem;
 }
 
 /* Container for all cards */
@@ -56,25 +60,25 @@
 /* Image styling */
 .card-img-top {
     width: 100%;
-    height: 180px;
+    height: 135px;
     object-fit: cover;
 }
 
 /* Card body */
 .card-body {
-    padding: 1rem;
+    padding: 0.3rem;
 }
 
-.card-body h4 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
+.card-body h5 {
+    font-size: 0.9rem;
+    /* margin-bottom: 0.5rem; */
     color: #222;
 }
 
 .card-text {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     color: #555;
-    margin-bottom: 0.5rem;
+    /* margin-bottom: 0.5rem; */
 }
 
 /* Link styling */
@@ -153,4 +157,5 @@ footer {
         justify-content: flex-start;
     }
 }
+
 
