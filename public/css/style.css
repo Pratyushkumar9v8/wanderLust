@@ -71,14 +71,14 @@
 
 .card-body h5 {
     font-size: 0.9rem;
-    /* margin-bottom: 0.5rem; */
+    margin-bottom: 0.5rem;
     color: #222;
 }
 
 .card-text {
     font-size: 0.8rem;
     color: #555;
-    /* margin-bottom: 0.5rem; */
+    margin-bottom: 0rem;
 }
 .user-logo{
     display: flex;
