@@ -1,16 +1,16 @@
 <% layout("/layouts/boilerplate") %>
 
-<h3 class="mb-4">Your Wishlists ❤️</h3>
+<body>
+  <h3 class="mb-4">Your Wishlists ❤️</h3>
 
 <% if (wishlist.length === 0) { %>
   <div class="alert alert-info">You haven't added any listings to your wishlist yet.</div>
 <% } else { %>
-  <div class="row">
+      <div class="bg-container mt-3" >
     <% wishlist.forEach(listing => { %>
       <!-- Render listing cards -->
-      <div class="bg-container mt-3" >
         <%- include('./listings/card', { listing }) %>
-      </div>
     <% }) %>
   </div>
 <% } %>
+</body>
