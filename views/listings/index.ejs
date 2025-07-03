@@ -2,7 +2,7 @@
 
 <body>
     <style>
-        @media (min-width: 800px) {
+        @media (min-width: 767px) {
             .filter-bar-wrapper {
                 display: flex;
                 align-items: center;
@@ -10,13 +10,12 @@
             }
             #filters {
                 flex-grow: 1;
-                margin-right: 10rem;
             }
             .card{
                 width: 11rem;
             }
         }
-        @media (max-width: 800px) {
+        @media (max-width: 767px) {
             .filter-bar-wrapper {
                 display: flex;
                 align-items: center;
@@ -138,8 +137,6 @@
 
         <% for(let listing of listings.slice().reverse()) { %>
                       <%- include('../listings/card', { listing }) %>
-
-
         <% } %>
     </div>
 
