@@ -80,7 +80,11 @@
     color: #555;
     /* margin-bottom: 0.5rem; */
 }
-
+.user-logo{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 /* Link styling */
 .card a {
     text-decoration: none;
