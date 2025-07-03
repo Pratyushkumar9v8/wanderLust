@@ -71,9 +71,9 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: true,
   cookie:{
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7 ,
-    maxAge: 60 * 60 * 24 * 7 * 1000 ,
-    httpOnly: true,
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 2),
+    maxAge: 60 * 60 * 24 * 2 * 1000 ,
+    httpOnly: true
   }
 };
 
