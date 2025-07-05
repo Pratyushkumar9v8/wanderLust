@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" ><i class="fa-solid fa-compass"></i> &nbsp; <b>wanderlust</b> </a>
+    <a class="navbar-brand" ><span style="font-family: 'Poppins', sans-serif;  font-weight: 600;">
+      <i class="fa-solid fa-compass"></i> &nbsp;Wanderlust
+    </span>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -32,18 +35,18 @@
           <li class="nav-item" >
             <a class="nav-link " >
             <div class="user-logo">
-              <p style="margin-bottom: 8px;"><%= currentUser.username %></p>
+              <p style="margin-bottom: 5px;"><%= currentUser.username %></p>
             <% if (currentUser.profilePicture) { %>
           <img 
             valu
             src="<%= currentUser.profilePicture %>" 
             alt="User profile" 
-            title="<%= currentUser.username %>" 
+            title="<%= currentUser.email %>" 
             class="rounded-circle mb-2" 
             style="width: 35px; height: 35px; object-fit: cover; border: 2px solid #ddd;"
           >
         <% } else { %>
-          <div title="<%= currentUser.username %>" 
+          <div title="<%= currentUser.email %>" 
             class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center mb-2"
             style="width: 35px; height: 35px; font-size: 32px; font-weight: bold;"
           >
