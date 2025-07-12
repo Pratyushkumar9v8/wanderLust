@@ -10,7 +10,8 @@ module.exports = () => {
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const existingUser = await User.findOne({ googleId: profile.id });
+        const email = profile.emails[0].value;
+        const existingUser = await User.findOne({ email  });
 
         if (existingUser) return done(null, existingUser);
 
