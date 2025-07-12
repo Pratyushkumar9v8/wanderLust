@@ -42,6 +42,15 @@ const listingSchema = new Schema({
       ref:"Review",
     }
   ],
+   //  fields for coordinates
+  latitude: {
+    type: Number,
+    required: true
+  },
+  longitude: {
+    type: Number,
+    required: true
+  },
     owner:{
       type: Schema.Types.ObjectId,
       ref: 'User',

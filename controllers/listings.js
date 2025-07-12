@@ -20,7 +20,7 @@ module.exports.new=(req,res)=>{
 module.exports.create = async (req, res,next) => {
   console.log("Incoming listing data:", req.body);
   console.log("Incoming listing data:", req.body.listing);
-console.log("Uploaded file:", req.file);
+  console.log("Uploaded file:", req.file);
 
   const data = req.body.listing;
   

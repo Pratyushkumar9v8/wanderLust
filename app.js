@@ -36,7 +36,7 @@ app.engine('ejs', ejsMate);
 
 async function main() {
   try {
-    const dbUrl = process.env.ATLASDB_URL ;
+    const dbUrl = (process.env.ATLASDB_URL || 'mongodb://localhost:27017/wanderlust') ;
     await mongoose.connect(dbUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true
@@ -54,7 +54,7 @@ main()
 .catch(err => console.log(err));
 
 const store = MongoStore.create({
-  mongoUrl:process.env.ATLASDB_URL,
+  mongoUrl:(process.env.ATLASDB_URL || 'mongodb://localhost:27017/wanderlust'),
   crypto:{
     secret:process.env.SECRET,
   },

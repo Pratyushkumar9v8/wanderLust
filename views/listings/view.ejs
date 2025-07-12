@@ -17,11 +17,11 @@
                 </div>
 
             </div>
-<% if (currentUser && currentUser._id.toString() === listing.owner._id.toString()) { %>
-            <div style="display: flex; ">
-                <a href="/listings/<%= listing.id %>/edit" style="margin-right: 50px;" ><button class="btn btn-dark">Edit</button></a>
-            <form method="post" action="/listings/<%= listing.id %>?_method=Delete"><button type="submit" class="btn btn-danger">Delete</button></form>
-            </div>
+            <% if (currentUser && currentUser._id.toString() === listing.owner._id.toString()) { %>
+                        <div style="display: flex; ">
+                            <a href="/listings/<%= listing.id %>/edit" style="margin-right: 50px;" ><button class="btn btn-dark">Edit</button></a>
+                        <form method="post" action="/listings/<%= listing.id %>?_method=Delete"><button type="submit" class="btn btn-danger">Delete</button></form>
+                        </div>
             <% } %>
             <br><hr>
         </div>
@@ -77,5 +77,26 @@
                         <% } %>
                 </div>
             </div>
+            <% if (listing.latitude && listing.longitude) { %>
+                <div id="map" style="height: 400px; width: 100%; border-radius: 10px; margin-bottom: 20px;"></div>
+
+                <script>
+                    const lat = Number("<%= listing.latitude || 0 %>");
+                    const lng = Number("<%= listing.longitude || 0 %>");
+
+                    const map = L.map('map').setView([lat, lng], 13);
+
+                    L.tileLayer('https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}.png?apiKey=9e1bc309c96443ceae6ee3401edf4eed', {
+                        attribution: '&copy; OpenStreetMap contributors',
+                        maxZoom: 18,
+                    }).addTo(map);
+
+                    L.marker([lat, lng]).addTo(map).bindPopup("<%= listing.title %>").openPopup();
+                </script>
+                <% } else { %>
+                <div class="alert alert-warning" role="alert">
+                    Map location not available for this listing.
+                </div>
+            <% } %>     
     </div>
 </body>

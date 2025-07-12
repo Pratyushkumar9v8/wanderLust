@@ -27,7 +27,9 @@ module.exports.listingSchema = Joi.object({
                   'Serviced Apartment',
                   'Farmhouse',
                   'Row House'
-                ).required()
+                ).required(),
+      latitude: Joi.number().required(),
+      longitude: Joi.number().required(),
   }).required()
 });
 
