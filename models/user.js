@@ -16,7 +16,11 @@ const userSchema=new Schema({
             ref: 'Listing'
         }
     ],
-    googleId: String,
+     googleId: {
+        type: String,
+        unique: true,
+        sparse: true, // ✅ prevents issues when some users don't have googleId
+    },
     profilePicture: String
 });
 

@@ -13,7 +13,13 @@ module.exports = () => {
         const email = profile.emails[0].value;
         const existingUser = await User.findOne({ email  });
 
-        if (existingUser) return done(null, existingUser);
+        if (existingUser){
+           if (!existingUser.googleId) {
+              existingUser.googleId = profile.id;
+              await existingUser.save();
+            }
+           return done(null, existingUser);
+        }
 
         // If not found, create a new user
         const newUser = new User({
