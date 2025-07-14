@@ -16,7 +16,7 @@
                 </div>
                 <div style="flex: 1;">
                     <label for="type" class="form-label">Type:</label>
-                    <select name="listing[type]" id="type" class="form-select" required>
+                    <select name="listing[type]" id="type" class=" form-control" required>
                         <option disabled selected>Select type</option>
                         <option value="Room" <%= listing.type === 'Room' ? 'selected' : '' %>>Room</option>
                         <option value="Flat" <%= listing.type === 'Flat' ? 'selected' : '' %>>Flat</option>
@@ -42,10 +42,10 @@
                     Original Listing Image:<br>
                     <img src="<%= originalImageUrl%>" alt="<%= listing.title %>" style="max-width: 200px;">
             </div>
-            <label for="image" class="form-label">Upload New Image: (max size: 5mb)</label>
+            <label for="image" class="form-label">Upload New Image: (max size: 2mb)</label>
             <input type="file" name="listing[image]" class="form-control">
 
-            <label for="location" class="form-label">Location:</label>
+            <label for="location" class="form-label">City:</label>
             <input required class="form-control" type="text" name="listing[location]" value="<%= listing.location %>">
 
             <label for="country" class="form-label">Country:</label>
@@ -53,6 +53,13 @@
 
              <label for="map" class="form-label">Choose Location :</label>
             <div id="map" style="height: 400px; width: 100%; margin-bottom: 20px;"></div>
+<script>
+  const initialLat = ("<%= listing.latitude || 20.5937 %>");
+  const initialLng = ("<%= listing.longitude || 78.9629 %>");
+
+  map.setView([initialLat, initialLng], "<%= listing.latitude && listing.longitude ? 13 : 5 %>");
+  marker = L.marker([initialLat, initialLng]).addTo(map);
+</script>
 
             <script>
             let map = L.map('map').setView([20.5937, 78.9629], 5); // Default India
@@ -78,8 +85,8 @@
             </script>
 
             <!-- Hidden form inputs -->
-            <input type="hidden" name="listing[latitude]" id="latitude">
-            <input type="hidden" name="listing[longitude]" id="longitude">
+            <input type="hidden" name="listing[latitude]" id="latitude" value="<%= listing.latitude %>">
+            <input type="hidden" name="listing[longitude]" id="longitude" value="<%= listing.longitude %>">
 
             <br>
             <button type="submit" class="btn btn-dark">Edit</button>

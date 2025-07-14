@@ -44,13 +44,15 @@
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             -ms-overflow-style: none;
+            align-items: center;
+            padding-bottom: 5px;
         }
         #filters::-webkit-scrollbar {
             display: none;
         }
         .filter {
             text-align: center;
-            margin: 1rem 1.5rem 0 1rem;
+            margin: 0.5rem 1.5rem 0 1rem;
             opacity: 0.7;
             flex: 0 0 auto;
             transition: opacity 0.3s ease;
@@ -83,13 +85,30 @@
             white-space: nowrap;
             margin-left: 10px;
         }
+        .form-control{
+            margin-right: 25px;
+            margin-left: 15px;
+        }
+        #suggestions{
+            z-index: 12;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 2.5rem;
+            padding: 0;
+            /* width: 100%; */
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+        }
     </style>
 
     <div class="filter-bar-wrapper">
-        <div id="filters" class="mb-3">
-            <div class="filter">
-                <form class="d-flex " role="search">
-                    <input class="form-control me-4" type="search" placeholder="Search destination" aria-label="Search"/>
+        <div id="filters" >
+            <div class="filter" >
+                <form action="/listings" method="GET" class="d-flex " role="search">
+                    <input class="form-control" id="location-search" name="location" placeholder="Search by location..." class="form-control mb-2" value="<%= selectedLocation %>" autocomplete="off">
+                    <ul id="suggestions" class="list-group position-absolute "></ul>
+                    <input type="hidden" name="type" value="<%= selectedType %>">
                     <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass-location"></i></button>
                 </form>
             </div>
@@ -98,7 +117,7 @@
         <div class="tax-toggle-wrapper">
             <div class="all-types">
                 <form method="GET" action="/listings" class="mb-0.5">
-                    <!-- <label for="type" class="form-label">Filter by Type:</label> -->
+                    <input type="hidden" name="location" value="<%= selectedLocation %>">
                     <select name="type" id="type" class="form-select" onchange="this.form.submit()">
                         <option value="">All Types</option>
                         <option value="Room" <%= selectedType === 'Room' ? 'selected' : '' %>>Room</option>
@@ -140,7 +159,6 @@
         <% } %>
     </div>
 
-</body>
 
 <script>
     let taxSwitch = document.getElementById('switchCheckDefault');
@@ -191,4 +209,42 @@ document.querySelectorAll('.wishlist-btn').forEach(button => {
   });
 });
 </script>
+<script>
+  const input = document.getElementById('location-search');
+  const suggestions = document.getElementById('suggestions');
 
+  input.addEventListener('input', async () => {
+    const value = input.value.trim();
+    if (!value) return suggestions.innerHTML = '';
+
+    const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${value}&type=city&limit=5&apiKey=9e1bc309c96443ceae6ee3401edf4eed`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      suggestions.innerHTML = '';
+
+      data.features.forEach(feature => {
+        const name = feature.properties.city || feature.properties.name;
+        const li = document.createElement('li');
+        li.textContent = name;
+        li.classList.add('list-group-item', 'list-group-item-action');
+        li.addEventListener('click', () => {
+          input.value = name;
+          suggestions.innerHTML = '';
+        });
+        suggestions.appendChild(li);
+      });
+    } catch (err) {
+      console.error('Autocomplete error:', err);
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!suggestions.contains(e.target) && e.target !== input) {
+      suggestions.innerHTML = '';
+    }
+  });
+</script>
+
+</body>

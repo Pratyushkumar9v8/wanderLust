@@ -1,16 +1,22 @@
 const Listing = require('../models/listing');
 
-module.exports.index=async (req, res,next) => {
-  const { type } = req.query;
+module.exports.index = async (req, res, next) => {
+  const { type, location } = req.query;
   try {
-    const filter = type ? { type } : {};
+    const filter = {};
+    if (type) filter.type = type;
+    if (location) filter.location = { $regex: new RegExp(location, 'i') };
+
     const listings = await Listing.find(filter);
-    res.render('listings/index', { listings, selectedType: type || '' });
+    res.render('listings/index', {
+      listings,
+      selectedType: type || '',
+      selectedLocation: location || ''
+    });
   } catch (error) {
     next(error);
-    // res.status(500).send('Error fetching listings: ' + error.message);
   }
-}
+};
 
 module.exports.new=(req,res)=>{
   console.log(req.user);
