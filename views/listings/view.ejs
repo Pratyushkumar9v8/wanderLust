@@ -60,13 +60,13 @@
                 <div class="row" >
 
                         <% for(let review of listing.reviews.slice().reverse()) {%>
-                <div class="card col-6 ms-3 mb-3 offset-2" style="min-width: 16rem;" >
+                <div class="card col-6 ms-3 mb-3 offset-2" style="width: 14rem;" >
 
                         <div class="card-body">
                             <h5 class="card-title" >@<%= review.author.username  %></h5>
                             <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
                             <p class="card-text">Comment: <%= review.comment %></p>
-                            <p class="card-text">Posted on: <%= review.createdAt.toLocaleString("en-IN") %></p>
+                            <p class="card-text"> <%= review.createdAt.toLocaleString("en-IN") %></p>
                             <% if(currentUser && currentUser._id.toString() === review.author._id.toString()) { %>
                                 <form method="post" action="/listings/<%= listing.id %>/reviews/<%= review.id %>?_method=DELETE">
                                     <button type="submit" class="btn btn-danger">Delete</button>
