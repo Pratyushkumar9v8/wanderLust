@@ -51,6 +51,7 @@ const listingSchema = new Schema({
     type: Number,
     required: true
   },
+  bookedDates: [Date],
     owner:{
       type: Schema.Types.ObjectId,
       ref: 'User',
