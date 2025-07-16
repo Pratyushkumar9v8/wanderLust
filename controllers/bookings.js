@@ -55,3 +55,11 @@ module.exports.createBooking = async (req, res) => {
       res.redirect(`/bookings/${req.body.listingId}/new`);
     }
 }
+
+module.exports.showUserBookings = async (req, res) => {
+  const bookings = await Booking.find({ user: req.user._id })
+    .populate("listing")
+    .sort({ createdAt: -1 });
+
+  res.render("bookings/userBookings", { bookings });
+};

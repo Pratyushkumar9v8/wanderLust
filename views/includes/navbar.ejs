@@ -15,48 +15,55 @@
         <li class="nav-item">
           <a class="nav-link" href="/listings/new">Become a host </a>
         </li>
-        <% if (currentUser) { %>
-          <li class="nav-item">
-            <a class="nav-link" href="/wishlist">
-               Wishlists <i class="fa-solid fa-heart text-danger"></i>
-            </a>
-          </li>
-        <% } %>
 
         
       </ul>
       <ul class="navbar-nav ml-auto mt-2 mb-2 mb-lg-0 ">
         
-        <% if(!currentUser){ %> 
+        <% if(currentUser){ %> 
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" style="padding-top: 14px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Account
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/wishlist">Wishlists</a></li>
+                <li><a class="dropdown-item" href="/bookings/userBookings">Bookings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li  >
+                        <a class="dropdown-item" >
+                        <div class="user-logo">
+                          <p style="margin-bottom: 5px;"><%= currentUser.username %></p>
+                        <% if (currentUser.profilePicture) { %>
+                      <img 
+                        valu
+                        src="<%= currentUser.profilePicture %>" 
+                        alt="User profile" 
+                        title="<%= currentUser.email %>" 
+                        class="rounded-circle mb-2" 
+                        style="width: 35px; height: 35px; object-fit: cover; border: 2px solid #ddd;"
+                      >
+                    <% } else { %>
+                      <div title="<%= currentUser.email %>" 
+                        class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center mb-2"
+                        style="width: 35px; height: 35px; font-size: 32px; font-weight: bold;"
+                      >
+                        <%= currentUser.username.charAt(0).toUpperCase() %>
+                      </div>
+                    <% } %>
+                        </div>
+                    </a> 
+                </li>
+              </ul>
+            </li>
+            <%}%>
+
+          <% if(!currentUser){ %> 
                 <li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="/user/signup">SignUp</a></li>
            <% } else{%>
             <li class="nav-item " ><a class="nav-link" style="padding-top: 14px;" href="/user/logout">Logout</a></li>  
-          <li class="nav-item" >
-            <a class="nav-link " >
-            <div class="user-logo">
-              <p style="margin-bottom: 5px;"><%= currentUser.username %></p>
-            <% if (currentUser.profilePicture) { %>
-          <img 
-            valu
-            src="<%= currentUser.profilePicture %>" 
-            alt="User profile" 
-            title="<%= currentUser.email %>" 
-            class="rounded-circle mb-2" 
-            style="width: 35px; height: 35px; object-fit: cover; border: 2px solid #ddd;"
-          >
-        <% } else { %>
-          <div title="<%= currentUser.email %>" 
-            class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center mb-2"
-            style="width: 35px; height: 35px; font-size: 32px; font-weight: bold;"
-          >
-            <%= currentUser.username.charAt(0).toUpperCase() %>
-          </div>
-        <% } %>
-            </div>
-        </a> 
-        </li>
           <%}%>
+          
         
       </ul>
     </div>
