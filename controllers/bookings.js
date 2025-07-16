@@ -63,3 +63,32 @@ module.exports.showUserBookings = async (req, res) => {
 
   res.render("bookings/userBookings", { bookings });
 };
+
+module.exports.deleteBooking = async (req, res) => {
+  const { id } = req.params;
+
+  const booking = await Booking.findById(id);
+  if (!booking) {
+    req.flash("error", "Booking not found.");
+    return res.redirect("/bookings/userBookings");
+  }
+
+  // Ensure user owns the booking
+  if (!booking.user.equals(req.user._id)) {
+    req.flash("error", "You are not authorized to cancel this booking.");
+    return res.redirect("/bookings/userBookings");
+  }
+  
+  const now = new Date();
+  const timeDifference = booking.startDate.getTime() - now.getTime();
+  const hoursRemaining = timeDifference / (1000 * 60 * 60); // milliseconds → hours
+
+  if (hoursRemaining < 24) {
+    req.flash("error", "Cancellations are only allowed at least 24 hours before the check-in date.");
+    return res.redirect("/my-bookings");
+  }
+
+  await Booking.findByIdAndDelete(id);
+  req.flash("success", "Booking cancelled successfully.");
+  res.redirect("/bookings/userBookings");
+}
