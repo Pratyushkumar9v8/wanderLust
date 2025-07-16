@@ -25,7 +25,7 @@ const wishlistRoutes = require('./routes/wishlist');
 const bookingRoutes = require('./routes/bookings');
 
 require('dotenv').config();
-require('./passportConfig.js')(); // Load strategy
+require('./passportConfig.js')();
 
 
 app.set('view engine', 'ejs');
@@ -42,9 +42,9 @@ async function main() {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
-    console.log("✅ MongoDB connected successfully.");
+    console.log(" MongoDB connected successfully.");
   } catch (err) {
-    console.error("❌ MongoDB connection error:", err);
+    console.error(" MongoDB connection error:", err);
   }
 }
 
@@ -105,9 +105,6 @@ app.use('/user', userRouter);
 app.use("/bookings", bookingRoutes);
 app.use(wishlistRoutes);
 
-
-
-// app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 app.use((err,req, res,next) => {
   let { statusCode = 500, message = "Something went wrong" } = err;

@@ -82,7 +82,7 @@
 
     <div class="bg-container mt-3">
         <% if (listings.length === 0) { %>
-            <div class="alert alert-warning">No listings found for "<%= selectedType %>"</div>
+            <div class="alert alert-warning">No listings found for "<%= selectedType || selectedLocation %>"</div>
         <% } %>
 
         <% for(let listing of listings.slice().reverse()) { %>

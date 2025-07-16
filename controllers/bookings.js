@@ -4,6 +4,10 @@ const ExpressError = require("../utils/ExpressError"); // ADD this if not presen
 
 module.exports.newBook=async (req, res) => {
   const listing = await Listing.findById(req.params.listingId);
+  if (!listing) {
+    req.flash("error", "Listing not found");
+    return res.redirect("/listings");
+  }
   res.render("bookings/new", { listing });
 }
 module.exports.createBooking = async (req, res) => {
@@ -45,9 +49,9 @@ module.exports.createBooking = async (req, res) => {
 
     req.flash("success", "Booking confirmed!");
     res.redirect(`/listings/${listingId}`);
-  } catch (err) {
-    console.error(err);
-    req.flash("error", "Something went wrong.");
-    res.redirect("back");
-  }
+    } catch (err) {
+      console.error(err);
+      req.flash("error", "Something went wrong.");
+      res.redirect(`/bookings/${req.body.listingId}/new`);
+    }
 }
