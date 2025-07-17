@@ -7,8 +7,12 @@
 <% } else { %>
   <div class="row">
 <% bookings.forEach(booking => { 
-     const now = new Date();
-     const hoursLeft = (new Date(booking.startDate) - now) / (1000 * 60 * 60); // in hours
+  const now = new Date();
+  const start = new Date(booking.startDate);
+  const end = new Date(booking.endDate);
+  const hoursLeft = (start - now) / (1000 * 60 * 60);
+  const checkInPassed = now > start;
+  const notCheckedOut = now < end;
 %>
   <div class="col-md-6 mb-3">
     <div class="card shadow-sm p-3">
@@ -16,9 +20,17 @@
       <p><%= booking.listing.location %></p>
       <p>From: <%= booking.startDate.toDateString() %> → To: <%= booking.endDate.toDateString() %></p>
       <p>Booked on: <%= booking.createdAt.toDateString() %></p>
+
+      <% if (checkInPassed && !booking.reviewGiven) { %>
+        <div class="alert alert-warning p-2 mb-2">
+          Please <a href="/bookings/<%= booking._id %>/review" class="alert-link">give a rating</a> for this stay.
+        </div>
+      <% } %>
+
       <div class="d-flex justify-content-between align-items-center">
         <a href="/listings/<%= booking.listing._id %>" class="btn btn-sm btn-primary">View Listing</a>
 
+        <% if (now < start) { %> 
         <form method="POST" action="/bookings/<%= booking._id %>?_method=DELETE" style="display:inline;">
           <button type="submit" class="btn btn-sm btn-danger"
             <% if (hoursLeft < 24) { %> disabled <% } %>
@@ -26,14 +38,12 @@
             Cancel Booking
           </button>
         </form>
-
+        <% } %>
       </div>
-       <% if (hoursLeft < 24) { %>
-        <small class="text-danger d-block mt-1">⚠️ Cannot cancel within 24 hours of check-in.</small>
-      <% } %>
+
+
     </div>
   </div>
 <% }) %>
-
   </div>
 <% } %>
