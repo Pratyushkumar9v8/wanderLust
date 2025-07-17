@@ -92,3 +92,7 @@ module.exports.deleteBooking = async (req, res) => {
   req.flash("success", "Booking cancelled successfully.");
   res.redirect("/bookings/userBookings");
 }
+
+module.exports.terms = (req, res) => {
+  res.render("bookings/terms");
+}

@@ -11,6 +11,8 @@ router.post("/", isLoggedIn, bookingController.createBooking);
 
 router.get("/userBookings", isLoggedIn, bookingController.showUserBookings);
 
+router.get("/terms", bookingController.terms);
+
 router.delete("/:id", isLoggedIn, bookingController.deleteBooking);
 
 module.exports = router;

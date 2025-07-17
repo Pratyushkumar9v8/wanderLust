@@ -23,6 +23,7 @@ const {storage}=require("./cloudConfig.js");
 const upload = multer({storage});
 const wishlistRoutes = require('./routes/wishlist');
 const bookingRoutes = require('./routes/bookings');
+const partialsRoutes = require('./routes/partials');
 
 require('dotenv').config();
 require('./passportConfig.js')();
@@ -104,6 +105,7 @@ app.use('/listings/:id/reviews',reviewsRouter);
 app.use('/user', userRouter);
 app.use("/bookings", bookingRoutes);
 app.use(wishlistRoutes);
+app.use(partialsRoutes);
 
 
 app.use((err,req, res,next) => {
