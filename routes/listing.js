@@ -10,7 +10,7 @@ const {storage}=require("../cloudConfig.js");
 
 const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: 2 * 1024 * 1024 }, // 2MB limit
   fileFilter: function (req, file, next) {
     const allowedTypes = /jpeg|jpg|png/;
     const isValid = allowedTypes.test(file.mimetype);
@@ -45,7 +45,7 @@ router
 router.use((err, req, res, next) => {
   if (err instanceof multer.MulterError) {
     if (err.code === 'LIMIT_FILE_SIZE') {
-      req.flash('error', 'Image exceeds 5MB size limit.');
+      req.flash('error', 'Image exceeds 2MB size limit.');
     } else if (err.code === 'LIMIT_UNEXPECTED_FILE') {
       req.flash('error', 'Only JPG, JPEG, PNG image formats are allowed.');
     } else {

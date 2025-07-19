@@ -17,8 +17,7 @@ module.exports.postSignup= async (req, res,next) => {
         req.login(registeredUser, (err) => {
             if(err) return next(err);
             req.flash('success', 'You are now registered!');
-            const redirectUrl = req.session.redirectUrl || '/listings';
-            delete req.session.redirectUrl; // Clear after use
+            const redirectUrl = res.locals.redirectUrl || '/listings';
             res.redirect(redirectUrl);
         });
     }catch(e){
@@ -33,8 +32,9 @@ module.exports.getLogin=(req, res) => {
 
 module.exports.postLogin=async (req, res) => {
     req.flash('success', 'welcome back '+ req.user.username + ' !');
-    const redirectUrl = req.session.redirectUrl || '/listings';
-    delete req.session.redirectUrl; // Clear after use
+    // console.log(res.locals.redirectUrl);
+    const redirectUrl = res.locals.redirectUrl || '/listings';
+    // console.log(redirectUrl);
     res.redirect(redirectUrl);
 }
 

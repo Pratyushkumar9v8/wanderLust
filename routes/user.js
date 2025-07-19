@@ -10,7 +10,7 @@ const listingController= require("../controllers/user.js");
 router
      .route('/signup')
      .get( listingController.getSignup)
-     .post(wrapAsync( listingController.postSignup));
+     .post(saveRedirectUrl,wrapAsync( listingController.postSignup));
 
 router
      .route('/login')
